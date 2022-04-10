@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day1_TaxiDistance", "Day1_T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day2_Numpad", "Day2_Numpad\Day2_Numpad.csproj", "{AC5123B8-CB52-4C16-8E15-DDCAC0F2C7EB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day3_Triangles", "Day3_Triangles\Day3_Triangles.csproj", "{6ECE9802-81D0-4FA8-B740-EC50100CFEC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{AC5123B8-CB52-4C16-8E15-DDCAC0F2C7EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC5123B8-CB52-4C16-8E15-DDCAC0F2C7EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC5123B8-CB52-4C16-8E15-DDCAC0F2C7EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ECE9802-81D0-4FA8-B740-EC50100CFEC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ECE9802-81D0-4FA8-B740-EC50100CFEC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ECE9802-81D0-4FA8-B740-EC50100CFEC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ECE9802-81D0-4FA8-B740-EC50100CFEC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
