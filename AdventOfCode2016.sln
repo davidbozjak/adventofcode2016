@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day6_Repetition", "Day6_Rep
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day7_IPv7", "Day7_IPv7\Day7_IPv7.csproj", "{F9896F59-8D00-4453-ADF0-23F293E5EF60}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day8_Squares", "Day8_Squares\Day8_Squares.csproj", "{0A753909-BF09-4F72-B393-001C62B440D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{F9896F59-8D00-4453-ADF0-23F293E5EF60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9896F59-8D00-4453-ADF0-23F293E5EF60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9896F59-8D00-4453-ADF0-23F293E5EF60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A753909-BF09-4F72-B393-001C62B440D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A753909-BF09-4F72-B393-001C62B440D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A753909-BF09-4F72-B393-001C62B440D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A753909-BF09-4F72-B393-001C62B440D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
