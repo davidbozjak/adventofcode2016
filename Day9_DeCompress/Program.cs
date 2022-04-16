@@ -1,4 +1,4 @@
-﻿string compressedString = new InputProvider<string?>("Input.txt", GetString).First();
+﻿string compressedString = new InputProvider<string?>("Input.txt", GetString).Where(w => w != null).Cast<string>().First();
 
 Console.WriteLine($"Part 1: {GetDecompressedLength(compressedString, 0, compressedString.Length, false)}");
 Console.WriteLine($"Part 2: {GetDecompressedLength(compressedString, 0, compressedString.Length, true)}");
@@ -23,20 +23,20 @@ static long GetDecompressedLength(string compressedString, int startIndex, int e
                 timesString += compressedString[i];
             }
 
-            long noChars = int.Parse(noCharsString);
-            //string strToRepeat = compressedString.Substring(i + 1, noChars);
+            int noChars = int.Parse(noCharsString);
+            long expandedChars = noChars;
             
             if (enableRecursiveExpand)
             {
-                noChars = GetDecompressedLength(compressedString, i + 1, (int)(i + 1 + noChars), enableRecursiveExpand);
+                expandedChars = GetDecompressedLength(compressedString, i + 1, i + 1 + noChars, true);
             }
 
             for (int times = int.Parse(timesString); times > 0; times--)
             {
-                decompressedLength += noChars;
+                decompressedLength += expandedChars;
             }
 
-            i += int.Parse(noCharsString);
+            i += noChars;
         }
         else
         {
