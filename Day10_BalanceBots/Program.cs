@@ -39,18 +39,24 @@ foreach (var instruction in instructionStrings)
 }
 
 // DEBUG data
-//Bot.TraceChip1 = chips.GetOrCreateInstance(5);
-//Bot.TraceChip2 = chips.GetOrCreateInstance(2);
+//var tracingChip1 = chips.GetOrCreateInstance(5);
+//var tracingChip2 = chips.GetOrCreateInstance(2);
 
 //Real puzzle data
-Bot.TraceChip1 = chips.GetOrCreateInstance(61);
-Bot.TraceChip2 = chips.GetOrCreateInstance(17);
+var tracingChip1 = chips.GetOrCreateInstance(61);
+var tracingChip2 = chips.GetOrCreateInstance(17);
 
 while (instructionsToExecute.Count > 0)
 {
     var instruction = instructionsToExecute.Where(w => w.Bot.IsReadyToTransfer).First();
 
     var bot = instruction.Bot;
+    
+    if (bot.ContainsChip(tracingChip1) && bot.ContainsChip(tracingChip2))
+    {
+        Console.WriteLine($"Part 1: Bot {bot.Id} is responsible for comparing Chip {tracingChip1.Id} and Chip {tracingChip2.Id}");
+    }
+    
     bot.TransferChips(instruction.LowerChipRecipient, instruction.HigherChipRecipient);
 
     instructionsToExecute.Remove(instruction);
@@ -94,23 +100,18 @@ abstract class ChipRecipient
 [DebuggerDisplay("Bot {Id}")]
 class Bot : ChipRecipient
 {
-    public static Chip TraceChip1{ get; set; }
-    public static Chip TraceChip2 { get; set; }
-
     public bool IsReadyToTransfer => this.chips.Count == 2;
 
     public Bot(int id) : base(id)
     {
     }
 
+    public bool ContainsChip(Chip c) =>
+        this.chips.Contains(c);
+
     public void TransferChips(ChipRecipient setLower, ChipRecipient setHigher)
     {
         if (!this.IsReadyToTransfer) throw new Exception();
-
-        if (this.chips.Contains(TraceChip1) && this.chips.Contains(TraceChip2))
-        {
-            Console.WriteLine($"Part 1: I am bot {Id} and I am responsible for comparing Chip {TraceChip1.Id} and Chip {TraceChip2.Id}");
-        }
 
         setLower.ReceiveChip(this.chips.OrderBy(w => w.Id).First());
         setHigher.ReceiveChip(this.chips.OrderByDescending(w => w.Id).First());
