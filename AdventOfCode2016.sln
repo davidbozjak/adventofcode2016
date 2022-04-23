@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day8_Squares", "Day8_Square
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day9_DeCompress", "Day9_DeCompress\Day9_DeCompress.csproj", "{19ED1DD9-0012-4129-92F1-50679D732648}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day10_BalanceBots", "Day10_BalanceBots\Day10_BalanceBots.csproj", "{30A03E40-46D2-430A-8835-E73F19C04DC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{19ED1DD9-0012-4129-92F1-50679D732648}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19ED1DD9-0012-4129-92F1-50679D732648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19ED1DD9-0012-4129-92F1-50679D732648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30A03E40-46D2-430A-8835-E73F19C04DC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30A03E40-46D2-430A-8835-E73F19C04DC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30A03E40-46D2-430A-8835-E73F19C04DC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30A03E40-46D2-430A-8835-E73F19C04DC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
