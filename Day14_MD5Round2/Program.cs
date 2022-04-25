@@ -1,55 +1,40 @@
-﻿using System.Text;
-
-//string salt = "abc"; // debug string
+﻿//string salt = "abc"; // debug string
 string salt = "ngcjuoqr";
 
-var generatedHashes = new List<string>();
-var keys = new List<int>();
+var normalKeys = Get64KeyIndexes(new HashProvider(salt, 0));
+Console.WriteLine($"Part 1: {normalKeys.Last()}");
 
-for (int index = 0; keys.Count < 64; index++)
+var stretchedKeys = Get64KeyIndexes(new HashProvider(salt, 2016));
+Console.WriteLine($"Part 2: {stretchedKeys.Last()}");
+
+static IList<int> Get64KeyIndexes(HashProvider hashProvider)
 {
-    var c = FindFirstTripletInString(GetOrCreateHashN(index));
+    var keys = new List<int>();
 
-    if (c != null)
+    for (int index = 0; keys.Count < 64; index++)
     {
-        var strToConfirmKey = new string(Enumerable.Repeat((char)c, 5).ToArray());
-        for (int i = 1; i <= 1000; i++)
+        var c = FindFirstTripletInString(hashProvider.GetOrCreateHashN(index));
+
+        if (c != null)
         {
-            var hash = GetOrCreateHashN(index + i);
-
-            if (hash.Contains(strToConfirmKey))
+            var strToConfirmKey = new string(Enumerable.Repeat((char)c, 5).ToArray());
+            for (int i = 1; i <= 1000; i++)
             {
-                keys.Add(index);
-                break;
-            }
-        }
-    }
-}
+                var hash = hashProvider.GetOrCreateHashN(index + i);
 
-Console.WriteLine($"Part 1: {keys[63]}");
-
-string GetOrCreateHashN(int n)
-{
-    if (generatedHashes.Count <= n)
-    {
-        using (var md5 = System.Security.Cryptography.MD5.Create())
-        {
-            var existing = generatedHashes.Count;
-            for (int i = 0; i < 2000; i++)
-            {
-                var input = Encoding.ASCII.GetBytes(salt + (existing + i).ToString());
-                var hashbytes = md5.ComputeHash(input);
-
-                var hexRepresentation = Convert.ToHexString(hashbytes);
-                generatedHashes.Add(hexRepresentation);
+                if (hash.Contains(strToConfirmKey))
+                {
+                    keys.Add(index);
+                    break;
+                }
             }
         }
     }
 
-    return generatedHashes[n];
+    return keys;
 }
 
-char? FindFirstTripletInString(string input)
+static char? FindFirstTripletInString(string input)
 {
     int repeated = 1;
 
