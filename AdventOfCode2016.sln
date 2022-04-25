@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day12_Monorail", "Day12_Mon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day13_GeneratedMaze", "Day13_GeneratedMaze\Day13_GeneratedMaze.csproj", "{C9D658F9-4C6F-4D92-B292-2A0393D89F56}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day14_MD5Round2", "Day14_MD5Round2\Day14_MD5Round2.csproj", "{D146FC0A-DA82-4157-9ACC-92ECA16EE6D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{C9D658F9-4C6F-4D92-B292-2A0393D89F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9D658F9-4C6F-4D92-B292-2A0393D89F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9D658F9-4C6F-4D92-B292-2A0393D89F56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D146FC0A-DA82-4157-9ACC-92ECA16EE6D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D146FC0A-DA82-4157-9ACC-92ECA16EE6D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D146FC0A-DA82-4157-9ACC-92ECA16EE6D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D146FC0A-DA82-4157-9ACC-92ECA16EE6D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
