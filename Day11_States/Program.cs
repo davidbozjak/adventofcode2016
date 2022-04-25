@@ -54,36 +54,24 @@ var cum = new Item("CUM");
 var rm = new Item("RM");
 var pum = new Item("PUM");
 
-//Only for part 2:
-var eg = new Item("EG");
-var em = new Item("EM");
-var dg = new Item("DG");
-var dm = new Item("DM");
-
-pm.SetForbiddenItemList(new[] { cg, cug, rg, pug, eg, dg });
+pm.SetForbiddenItemList(new[] { cg, cug, rg, pug });
 pm.ShieldItem = pg;
 
-cm.SetForbiddenItemList(new[] { pg, cug, rg, pug, eg, dg });
+cm.SetForbiddenItemList(new[] { pg, cug, rg, pug });
 cm.ShieldItem = cg;
 
-cum.SetForbiddenItemList(new[] { cg, pg, rg, pug, eg, dg });
+cum.SetForbiddenItemList(new[] { cg, pg, rg, pug });
 cum.ShieldItem = cug;
 
-rm.SetForbiddenItemList(new[] { cg, cug, pg, pug, eg, dg });
+rm.SetForbiddenItemList(new[] { cg, cug, pg, pug });
 rm.ShieldItem = rg;
 
-pum.SetForbiddenItemList(new[] { cg, cug, rg, pg, eg, dg });
+pum.SetForbiddenItemList(new[] { cg, cug, rg, pg });
 pum.ShieldItem = pug;
-
-em.SetForbiddenItemList(new[] { cg, cug, rg, pg, pug, dg });
-em.ShieldItem = eg;
-
-dm.SetForbiddenItemList(new[] { cg, cug, rg, pg, pug, eg });
-dm.ShieldItem = dg;
 
 var initialState = new State(new[]
     {
-        new[] { elevator, pg, pm, eg, em, dg, dm },
+        new[] { elevator, pg, pm },
         new[] { cg, cug, rg, pug },
         new[] { cm, cum, rm, pum },
         Array.Empty<Item>()
@@ -93,26 +81,59 @@ var desiredState = new State(new[]
         Array.Empty<Item>(),
         Array.Empty<Item>(),
         Array.Empty<Item>(),
-        new [] { elevator, pg, pm, cg, cug, rg, pug, cm, cum, rm, pum, eg, em, dg, dm }
+        new [] { elevator, pg, pm, cg, cug, rg, pug, cm, cum, rm, pum }
     });
 
 if (!IsStateValid(initialState)) throw new Exception();
 if (!IsStateValid(desiredState)) throw new Exception();
 if (initialState.ContainedItemsCount != desiredState.ContainedItemsCount) throw new Exception();
 
-var path = AStarPathfinder.FindPath(initialState, desiredState, w => 0, GetValidMoves);
+var pathPart1 = AStarPathfinder.FindPath(initialState, desiredState, w => 0, GetValidMoves);
 
-Console.WriteLine($"Part 1: {path.Count - 1} steps");
+Console.WriteLine($"Part 1: {pathPart1.Count - 1} steps");
+
+//Additional items for part 2:
+var eg = new Item("EG");
+var em = new Item("EM");
+var dg = new Item("DG");
+var dm = new Item("DM");
+
+em.SetForbiddenItemList(new[] { cg, cug, rg, pg, pug, dg });
+em.ShieldItem = eg;
+
+dm.SetForbiddenItemList(new[] { cg, cug, rg, pg, pug, eg });
+dm.ShieldItem = dg;
+
+//include new elements in forbidden lists of original elements from part1
+pm.SetForbiddenItemList(new[] { cg, cug, rg, pug, eg, dg });
+cm.SetForbiddenItemList(new[] { pg, cug, rg, pug, eg, dg });
+cum.SetForbiddenItemList(new[] { cg, pg, rg, pug, eg, dg });
+rm.SetForbiddenItemList(new[] { cg, cug, pg, pug, eg, dg });
+pum.SetForbiddenItemList(new[] { cg, cug, rg, pg, eg, dg });
+
+//Include new elements in initial and desired states
+initialState = new State(new[]
+    {
+        new[] { elevator, pg, pm, eg, em, dg, dm },
+        new[] { cg, cug, rg, pug },
+        new[] { cm, cum, rm, pum },
+        Array.Empty<Item>()
+    });
+desiredState = new State(new[]
+    {
+        Array.Empty<Item>(),
+        Array.Empty<Item>(),
+        Array.Empty<Item>(),
+        new [] { elevator, pg, pm, cg, cug, rg, pug, cm, cum, rm, pum, eg, em, dg, dm }
+    });
+
+var pathPart2 = AStarPathfinder.FindPath(initialState, desiredState, w => 0, GetValidMoves);
+
+Console.WriteLine($"Part 2: {pathPart2.Count - 1} steps");
 
 IEnumerable<State> GetValidMoves(State state)
 {
-    var allMoves = GetAllMoves(state);
-
-    var validMoves = allMoves.Where(IsStateValid).ToList();
-
-    return validMoves;
-
-    //return GetAllMoves(state).Where(IsStateValid);
+    return GetAllMoves(state).Where(IsStateValid);
 }
 
 IEnumerable<State> GetAllMoves(State state)
@@ -243,8 +264,6 @@ class Item
 
     public void SetForbiddenItemList(IEnumerable<Item> items)
     {
-        if (this.forbiddenItemList.Count != 0) throw new Exception();
-
         this.forbiddenItemList.AddRange(items);
     }
 }
