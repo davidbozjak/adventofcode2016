@@ -54,7 +54,7 @@ public static class AStarPathfinder
             {
                 var tentativeScore = gScore[current] + neighbour.Cost;
 
-                var g = gScore.ContainsKey(neighbour) ? gScore[neighbour] : UInt16.MaxValue;
+                var g = gScore.ContainsKey(neighbour) ? gScore[neighbour] : int.MaxValue;
                 if (tentativeScore < g)
                 {
                     cameFrom[neighbour] = current;

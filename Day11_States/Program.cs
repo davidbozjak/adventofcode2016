@@ -1,31 +1,91 @@
-﻿//Part 1 Debug State
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Text;
 
 var elevator = new Item("E");
 
-var lg = new Item("LG");
-var lm = new Item("LM");
-var hg = new Item("HG");
-var hm = new Item("HM");
-
-lm.SetForbiddenItemList(new[] { hg });
-lm.ShieldItem = lg;
-
-hm.SetForbiddenItemList(new[] { lg });
-hm.ShieldItem = hg;
-
+//Debug State
 //Instructions:
 //The first floor contains a hydrogen-compatible microchip and a lithium-compatible microchip.
 //The second floor contains a hydrogen generator.
 //The third floor contains a lithium generator.
 //The fourth floor contains nothing relevant.
 
+//var lg = new Item("LG");
+//var lm = new Item("LM");
+//var hg = new Item("HG");
+//var hm = new Item("HM");
+
+//lm.SetForbiddenItemList(new[] { hg });
+//lm.ShieldItem = lg;
+
+//hm.SetForbiddenItemList(new[] { lg });
+//hm.ShieldItem = hg;
+
+//var initialState = new State(new[]
+//    {
+//        new[] { elevator, hm, lm },
+//        new[] { hg },
+//        new[] { lg },
+//        Array.Empty<Item>()
+//    });
+//var desiredState = new State(new[]
+//    {
+//        Array.Empty<Item>(),
+//        Array.Empty<Item>(),
+//        Array.Empty<Item>(),
+//        new [] { elevator, hg, hm, lm, lg }
+//    });
+
+//Real input
+//Instructions
+//The first floor contains a promethium generator (PG) and a promethium-compatible microchip (PM)
+//The second floor contains a cobalt generator (CG), a curium generator (CUG), a ruthenium generator (RG), and a plutonium generator (PUG).
+//The third floor contains a cobalt-compatible microchip (CM), a curium-compatible microchip (CUM), a ruthenium-compatible microchip (RM), and a plutonium-compatible microchip. (PUM)
+//The fourth floor contains nothing relevant.
+
+var pg = new Item("PG");
+var pm = new Item("PM");
+var cg = new Item("CG");
+var cug = new Item("CUG");
+var rg = new Item("RG");
+var pug = new Item("PUG");
+var cm = new Item("CM");
+var cum = new Item("CUM");
+var rm = new Item("RM");
+var pum = new Item("PUM");
+
+//Only for part 2:
+var eg = new Item("EG");
+var em = new Item("EM");
+var dg = new Item("DG");
+var dm = new Item("DM");
+
+pm.SetForbiddenItemList(new[] { cg, cug, rg, pug, eg, dg });
+pm.ShieldItem = pg;
+
+cm.SetForbiddenItemList(new[] { pg, cug, rg, pug, eg, dg });
+cm.ShieldItem = cg;
+
+cum.SetForbiddenItemList(new[] { cg, pg, rg, pug, eg, dg });
+cum.ShieldItem = cug;
+
+rm.SetForbiddenItemList(new[] { cg, cug, pg, pug, eg, dg });
+rm.ShieldItem = rg;
+
+pum.SetForbiddenItemList(new[] { cg, cug, rg, pg, eg, dg });
+pum.ShieldItem = pug;
+
+em.SetForbiddenItemList(new[] { cg, cug, rg, pg, pug, dg });
+em.ShieldItem = eg;
+
+dm.SetForbiddenItemList(new[] { cg, cug, rg, pg, pug, eg });
+dm.ShieldItem = dg;
+
 var initialState = new State(new[]
     {
-        new[] {elevator, hm, lm},
-        new[] {hg},
-        new[] {lg},
+        new[] { elevator, pg, pm, eg, em, dg, dm },
+        new[] { cg, cug, rg, pug },
+        new[] { cm, cum, rm, pum },
         Array.Empty<Item>()
     });
 var desiredState = new State(new[]
@@ -33,11 +93,12 @@ var desiredState = new State(new[]
         Array.Empty<Item>(),
         Array.Empty<Item>(),
         Array.Empty<Item>(),
-        new [] { elevator, hg, hm, lm, lg }
+        new [] { elevator, pg, pm, cg, cug, rg, pug, cm, cum, rm, pum, eg, em, dg, dm }
     });
 
 if (!IsStateValid(initialState)) throw new Exception();
 if (!IsStateValid(desiredState)) throw new Exception();
+if (initialState.ContainedItemsCount != desiredState.ContainedItemsCount) throw new Exception();
 
 var path = AStarPathfinder.FindPath(initialState, desiredState, w => 0, GetValidMoves);
 
