@@ -1,17 +1,7 @@
 ﻿using System.Text;
 
-//Test GenerateDragonStep:                              
-//Console.WriteLine(GenerateDragonStep("1"));             // expected: 100
-//Console.WriteLine(GenerateDragonStep("0"));             // expected: 001
-//Console.WriteLine(GenerateDragonStep("11111"));         // expected: 11111000000
-//Console.WriteLine(GenerateDragonStep("111100001010"));  // expected: 1111000010100101011110000
-
-//Test Cehcksum
-//Console.WriteLine(GetChecksum("110010110100"));           // Expected 100
-
 // Test input data
 //string inputData = "10000";
-//int discSpace = 20;
 
 // Real input data
 string inputData = "10010000000110000";
