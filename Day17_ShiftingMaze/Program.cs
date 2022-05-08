@@ -3,12 +3,22 @@ using System.Text;
 
 ShiftingCell.RootForHash  = "dmypynyp";
 
-var maze = new Maze(4, 4);
+var maze = new Maze(4, 4, (p, m) => { m.EndCell.OverridePath(p); return m.EndCell; });
 var initialState = (ShiftingCell)maze.GetCellOrNull(0, 0, "");
 
 var path = AStarPathfinder.FindPath(initialState, maze.EndCell, _ => 0, c => c.GetNeighbours());
 
 Console.WriteLine($"Part 1: {path.Last().Path}");
+
+
+List<int> paths = new List<int>();
+maze = new Maze(4, 4, (p, _) => { paths.Add(p.Length); return null; });
+initialState = (ShiftingCell)maze.GetCellOrNull(0, 0, "");
+
+var longestPath = AStarPathfinder.FindPath(initialState, maze.EndCell, _ => 0, c => c.GetNeighbours());
+if (longestPath != null) throw new Exception("Path is not expected to be found in this scenario since we are always returning null");
+
+Console.WriteLine($"Part 2: {paths.Max()}");
 
 class ShiftingCell : INode, IWorldObject, IEquatable<ShiftingCell>
 {
@@ -94,7 +104,9 @@ class Maze : IWorld
 
     public int Width { get; }
 
-    public Maze(int width, int height)
+    private readonly Func<string, Maze, ShiftingCell?> endCellHandlingFunc;
+
+    public Maze(int width, int height, Func<string, Maze, ShiftingCell?> endCellHandlingFunc)
     {
         this.Width = width;
         this.Height = height;
@@ -102,6 +114,7 @@ class Maze : IWorld
         this.CellFactory = new UniqueFactory<(int x, int y, string path), ShiftingCell>((p) => new ShiftingCell(p.x, p.y, p.path, this));
         
         this.EndCell = new ShiftingCell(this.Width - 1, this.Height - 1, "", this);
+        this.endCellHandlingFunc = endCellHandlingFunc;
     }
 
     public ShiftingCell EndCell { get; }
@@ -110,8 +123,7 @@ class Maze : IWorld
     {
         if (x == this.EndCell.Position.X && y == this.EndCell.Position.Y)
         {
-            this.EndCell.OverridePath(path);
-            return this.EndCell;
+            return this.endCellHandlingFunc(path, this);
         }
 
         if (x < 0) return null;
