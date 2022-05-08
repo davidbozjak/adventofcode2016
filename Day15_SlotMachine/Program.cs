@@ -2,23 +2,33 @@
 
 var discs = new InputProvider<RotatingDisc?>("Input.txt", GetRotatingDisc).Where(w => w != null).Cast<RotatingDisc>().ToList();
 
-long timeDelay = 0;
-long cycleMultiplyer = 1;
+Console.WriteLine($"Part 1: Delay for {GetSmallestTimeDelay(discs)}");
 
-for (int i = 0; i < discs.Count; i++)
+discs.ForEach(w => w.Reset());
+discs.Add(new RotatingDisc(11, 0));
+
+Console.WriteLine($"Part 2: Delay for {GetSmallestTimeDelay(discs)}");
+
+static long GetSmallestTimeDelay(List<RotatingDisc> discs)
 {
-    var currentDisc = discs[i];
+    long timeDelay = 0;
+    long cycleMultiplyer = 1;
 
-    while (currentDisc.StepsToZero != ((i + 1) % currentDisc.PositionsCount))
+    for (int i = 0; i < discs.Count; i++)
     {
-        discs.ForEach(w => w.AdvanceSteps(cycleMultiplyer));
-        timeDelay += cycleMultiplyer;
+        var currentDisc = discs[i];
+
+        while (currentDisc.StepsToZero != ((i + 1) % currentDisc.PositionsCount))
+        {
+            discs.ForEach(w => w.AdvanceSteps(cycleMultiplyer));
+            timeDelay += cycleMultiplyer;
+        }
+
+        cycleMultiplyer *= currentDisc.PositionsCount;
     }
 
-    cycleMultiplyer *= currentDisc.PositionsCount;
+    return timeDelay;
 }
-
-Console.WriteLine($"Part 1: Delay for {timeDelay}");
 
 static bool GetRotatingDisc(string? input, out RotatingDisc? value)
 {
