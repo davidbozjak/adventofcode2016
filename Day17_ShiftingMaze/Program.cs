@@ -4,16 +4,18 @@ using System.Text;
 ShiftingCell.RootForHash  = "dmypynyp";
 
 var maze = new Maze(4, 4, (p, m) => { m.EndCell.OverridePath(p); return m.EndCell; });
-var initialState = (ShiftingCell)maze.GetCellOrNull(0, 0, "");
+ShiftingCell initialState = maze.GetCellOrNull(0, 0, "") ?? throw new Exception();
 
 var path = AStarPathfinder.FindPath(initialState, maze.EndCell, _ => 0, c => c.GetNeighbours());
+
+if (path == null) throw new Exception();
 
 Console.WriteLine($"Part 1: {path.Last().Path}");
 
 
-List<int> paths = new List<int>();
+List<int> paths = new();
 maze = new Maze(4, 4, (p, _) => { paths.Add(p.Length); return null; });
-initialState = (ShiftingCell)maze.GetCellOrNull(0, 0, "");
+initialState = maze.GetCellOrNull(0, 0, "") ?? throw new Exception();
 
 var longestPath = AStarPathfinder.FindPath(initialState, maze.EndCell, _ => 0, c => c.GetNeighbours());
 if (longestPath != null) throw new Exception("Path is not expected to be found in this scenario since we are always returning null");
