@@ -31,7 +31,7 @@ while (activeElf != activeElf.NextElf)
     accrossElf.NextElf.PreviousElf = accrossElf.PreviousElf;
 
     activeElf = activeElf.NextElf;
-    accrossElf = remaining % 2 == 1 ? accrossElf.NextElf.NextElf : accrossElf.NextElf;
+    accrossElf = remaining % 2 == 1 ? accrossElf.NextElf.NextElf : accrossElf.NextElf;  // somewhat magic-y, due to the way "accross" works in the circle representation. Move to next if even number of elements remaining, otherwise skip one.
     remaining--;
 }
 
