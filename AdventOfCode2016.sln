@@ -47,6 +47,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day18_GameOfTraps", "Day18_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day19_EliminationCircle", "Day19_EliminationCircle\Day19_EliminationCircle.csproj", "{57C9FB5B-3C9C-471D-AD24-F0E361D1A7FE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day20_FirewallRules", "Day20_FirewallRules\Day20_FirewallRules.csproj", "{781D17C8-BBAC-42FD-8BE5-B752069313BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,10 @@ Global
 		{57C9FB5B-3C9C-471D-AD24-F0E361D1A7FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57C9FB5B-3C9C-471D-AD24-F0E361D1A7FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57C9FB5B-3C9C-471D-AD24-F0E361D1A7FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{781D17C8-BBAC-42FD-8BE5-B752069313BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{781D17C8-BBAC-42FD-8BE5-B752069313BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{781D17C8-BBAC-42FD-8BE5-B752069313BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{781D17C8-BBAC-42FD-8BE5-B752069313BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
