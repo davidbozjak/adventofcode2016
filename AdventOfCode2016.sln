@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day16_DragonChecksum", "Day
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day17_ShiftingMaze", "Day17_ShiftingMaze\Day17_ShiftingMaze.csproj", "{C61497CC-0C6B-4799-A40C-3DC23E868776}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day18_GameOfTraps", "Day18_GameOfTraps\Day18_GameOfTraps.csproj", "{AE3FB36B-33D5-40E0-A017-04144C011240}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{C61497CC-0C6B-4799-A40C-3DC23E868776}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C61497CC-0C6B-4799-A40C-3DC23E868776}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C61497CC-0C6B-4799-A40C-3DC23E868776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE3FB36B-33D5-40E0-A017-04144C011240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE3FB36B-33D5-40E0-A017-04144C011240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE3FB36B-33D5-40E0-A017-04144C011240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE3FB36B-33D5-40E0-A017-04144C011240}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
