@@ -1,52 +1,19 @@
 ﻿using System.Text.RegularExpressions;
 
 var input = "abcdefgh";
-//var input = "abcde";
 
 var instructionList = new InputProvider<IInstruction?>("Input.txt", ParseInstructionFromInput).Where(w => w != null).Cast<IInstruction>().ToList();
 
 var scrambledString = input;
 
-//var inputForTestingOfRotateBasedOnLetter = "abcdefgh";
-
-//foreach (char letter in inputForTestingOfRotateBasedOnLetter)
-//{
-//    var instruction = new RotateRightBasedOnPositionInstruction(letter);
-
-//    var initial = inputForTestingOfRotateBasedOnLetter;
-//    var scrambled = instruction.Process(initial);
-//    var reversed = instruction.ProcessReversed(scrambled);
-
-//    Console.WriteLine($"{letter}: {initial} becomes {scrambled} reverse becomes {reversed} - {(reversed == initial ? "correct" : "INCORRECT")}");
-//}
-
-//foreach (var instruction in instructionList)
-//{
-//    var initialString = scrambledString;
-//    scrambledString = instruction.Process(scrambledString);
-//    scrambledString = instruction.ProcessReversed(scrambledString);
-
-//    if (scrambledString != initialString) throw new Exception();
-//}
-
-foreach (var instruction in instructionList)
-{
-    Console.Write($"{scrambledString} becomes ");
-    scrambledString = instruction.Process(scrambledString);
-    Console.WriteLine(scrambledString);
-}
+instructionList.ForEach(w => scrambledString = w.Process(scrambledString));
 
 Console.WriteLine($"Part 1: {scrambledString}");
 
 scrambledString = "fbgdceah";
 instructionList.Reverse();
 
-foreach (var instruction in instructionList)
-{
-    Console.Write($"{scrambledString} becomes ");
-    scrambledString = instruction.ProcessReversed(scrambledString);
-    Console.WriteLine(scrambledString);
-}
+instructionList.ForEach(w => scrambledString = w.ProcessReversed(scrambledString));
 
 Console.WriteLine($"Part 2: {scrambledString}");
 
