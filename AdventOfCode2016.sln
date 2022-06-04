@@ -51,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day20_FirewallRules", "Day2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day21_StringScrambler", "Day21_StringScrambler\Day21_StringScrambler.csproj", "{48FEF772-DBC1-4F14-88DC-68DA01BC4556}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day22_Disks", "Day22_Disks\Day22_Disks.csproj", "{D7D2D908-5D9D-4101-A1B7-D20BBEA89F50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{48FEF772-DBC1-4F14-88DC-68DA01BC4556}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48FEF772-DBC1-4F14-88DC-68DA01BC4556}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48FEF772-DBC1-4F14-88DC-68DA01BC4556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7D2D908-5D9D-4101-A1B7-D20BBEA89F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7D2D908-5D9D-4101-A1B7-D20BBEA89F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7D2D908-5D9D-4101-A1B7-D20BBEA89F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7D2D908-5D9D-4101-A1B7-D20BBEA89F50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
