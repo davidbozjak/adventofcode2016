@@ -5,8 +5,6 @@ using System.Text.RegularExpressions;
 int payloadCounter = 0;
 var discs = new InputProvider<Disc?>("Input.txt", GetDisc).Where(w => w != null).Cast<Disc>().ToList();
 
-//Console.WriteLine($"Part 1: {startState.GetMovesToNonEmptyDiscs().Count()}");
-
 foreach (var disc in discs)
 {
     disc.SetNeighbours(discs);
@@ -18,6 +16,8 @@ var targetNode = discs.First(w => w.Position.Y == 0 && w.Position.X == 0);
 
 var endState = new EndStateDiscGrid(targetNode.Name, targetData.DataRegistry);
 var startState = new DiscGrid(targetData, discs);
+
+Console.WriteLine($"Part 1: {startState.GetMovesToNonEmptyDiscs().Count()}");
 
 var heuristicTarget = new Point(0, 0);
 int minHeuristic = int.MaxValue;
@@ -49,21 +49,15 @@ int GetHeuristicCost(DiscGrid discGrid)
     {
         manhattanDistanceSum += emptyDisc.Position.Y + emptyDisc.Position.X;
         manhattanDistanceSum += emptyDisc.Position.Distance(discGrid.DiscWithTargetData.Position) * 3;
-        //manhattanDistanceSum += emptyDisc.Position.Distance(heuristicTarget) - 1;
     }
     else
     {
         manhattanDistanceSum += 200 + emptyDisc.Position.Y + Math.Max(0, (emptyDisc.Position.X - 2) * 10);
     }
-    
-    //manhattanDistanceSum += discGrid.EmptyDiscs.Select(w => w.Position.Distance(discGrid.DiscWithTargetData.Position) - 1).Min();
 
     if (manhattanDistanceSum < minHeuristic)
     {
         minHeuristic = manhattanDistanceSum;
-
-        //var printer = new WorldPrinter(frameSize: 20);
-        //printer.Print(discGrid, discGrid.EmptyDiscs.First());
 
         Console.WriteLine($"{DateTime.Now.TimeOfDay}: {manhattanDistanceSum}");
     }
@@ -107,7 +101,7 @@ class Disc : IWorldObject
     public Point Position { get; }
 
     public char CharRepresentation => this.Used == 0 ? '_' : 
-        this.DataRegistry == "1050" ? this.Neighbours.Count(w => this.Used < w.Size).ToString()[0] :
+        this.DataRegistry == "1050" ? this.Neighbours.Count(w => this.Used < w.Size).ToString()[0] : //1050 is a hack, quick and dirty way to visualize the target data
         this.Used > 90 ? 'B' : '.';
 
     public int Z => 0;
@@ -206,18 +200,6 @@ class DiscGrid : IWorld, INode, IEquatable<DiscGrid>
 
         HashSet<DiscGrid> moves = new();
 
-        //// first check if we can move the target data somewhere
-
-        //foreach (var target in this.DiscWithTargetData.Neighbours)
-        //{
-        //    if (IsValidMove(target, this.DiscWithTargetData))
-        //    {
-        //        moves.Add(DataMove(target, this.DiscWithTargetData));
-        //    }
-        //}
-
-        // then check adding around empty states
-
         foreach (var emptyDisc in this.emptyDiscs)
         {
             foreach (var neighbour in emptyDisc.Neighbours)
@@ -228,34 +210,6 @@ class DiscGrid : IWorld, INode, IEquatable<DiscGrid>
                 }
             }
         }
-
-        // then any other ? Perhaps skip entirely
-
-        //int movesBefore = moves.Count;
-
-        //for (int i = 0; i < allDiscs.Count; i++)
-        //{
-        //    var discA = allDiscs[i];
-
-        //    for (int j = i + 1; j < allDiscs.Count; j++)
-        //    {
-        //        var discB = allDiscs[j];
-
-        //        if (IsValidMove(discA, discB))
-        //            moves.Add(DataMove(discA, discB));
-
-        //        if (IsValidMove(discB, discA))
-        //            moves.Add(DataMove(discB, discA));
-        //    }
-        //}
-
-        //if (moves.Count > movesBefore)
-        //{
-        //    Console.WriteLine("Actually added new options");
-        //}
-
-        //this.allDiscs.Clear();
-        //this.emptyDiscs.Clear();
 
         return moves;
 
@@ -285,11 +239,6 @@ class DiscGrid : IWorld, INode, IEquatable<DiscGrid>
             .Append(newFullDisc)
             .Append(newEmptyDisc)
             .ToList();
-
-        //if (sendingDisc == this.DiscWithTargetData)
-        //{
-        //    Console.WriteLine("Actually moving target data");
-        //}
 
         var newState = sendingDisc == this.DiscWithTargetData ?
             new DiscGrid(newFullDisc, discs) :
