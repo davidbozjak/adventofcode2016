@@ -55,6 +55,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day22_Disks", "Day22_Disks\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day23_Virus", "Day23_Virus\Day23_Virus.csproj", "{81BBD890-E821-4D85-9B32-2BF8F634DF6E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day24_TravelingHVACRobot", "Day24_TravelingHVACRobot\Day24_TravelingHVACRobot.csproj", "{4D4C1F44-6ADF-4179-88EB-6EF665159412}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{81BBD890-E821-4D85-9B32-2BF8F634DF6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81BBD890-E821-4D85-9B32-2BF8F634DF6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81BBD890-E821-4D85-9B32-2BF8F634DF6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D4C1F44-6ADF-4179-88EB-6EF665159412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D4C1F44-6ADF-4179-88EB-6EF665159412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D4C1F44-6ADF-4179-88EB-6EF665159412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D4C1F44-6ADF-4179-88EB-6EF665159412}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
