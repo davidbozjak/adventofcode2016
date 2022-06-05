@@ -18,7 +18,7 @@ for (int i = 0; i < pointsOfInterest.Count; i++)
     {
         var point2 = pointsOfInterest[j];
 
-        var path = AStarPathfinder.FindPath<Tile>(point1, point2, t => point2.Position.Distance(t.Position), t => t.Neighbours);
+        var path = AStarPathfinder.FindPath<Tile>(point1, point2, t => point2.Position.Distance(t.Position), t => t.TraversibleNeighbours);
         var distance = path.Count - 1;
 
         distances[(point1, point2)] = distance;
@@ -26,7 +26,33 @@ for (int i = 0; i < pointsOfInterest.Count; i++)
     }
 }
 
-Console.WriteLine(distances);
+var orderedPoints = pointsOfInterest.OrderBy(w => w.NumberOfInterest);
+var pointZero = orderedPoints.First();
+var pointsToVisit = orderedPoints.Skip(1).ToList();
+
+Console.WriteLine($"Part 1: {GetMinDistance(pointZero, pointsToVisit, _ => 0)}");
+Console.WriteLine($"Part 2: {GetMinDistance(pointZero, pointsToVisit, t => distances[(t, pointZero)])}");
+
+int GetMinDistance(PointOfInterestTile tile, List<PointOfInterestTile> tilesToVisit, Func<PointOfInterestTile, int> endFunc)
+{
+    if (tilesToVisit.Count == 0) return endFunc(tile);
+
+    int min = int.MaxValue;
+
+    foreach (var targetTile in tilesToVisit)
+    {
+        var distance = distances[(tile, targetTile)];
+
+        var totalDistance = distance + GetMinDistance(targetTile, tilesToVisit.Where(w => w != targetTile).ToList(), endFunc);
+
+        if (totalDistance < min)
+        {
+            min = totalDistance;
+        }
+    }
+
+    return min;
+}
 
 Tile CreateTile(int x, int y, char c, Func<Tile, IEnumerable<Tile>> fillNeighboursFunc)
 {
@@ -53,36 +79,6 @@ static bool GetString(string? input, out string? value)
     return true;
 }
 
-class Tile : IWorldObject, INode, IEquatable<Tile>
-{
-    public Point Position { get; }
-
-    public virtual char CharRepresentation => this.IsTraversable ? '.' : '#';
-
-    public int Z => 0;
-
-    public bool IsTraversable { get; }
-
-    private readonly Cached<IEnumerable<Tile>> cachedNeighbours;
-
-    public IEnumerable<Tile> Neighbours => this.cachedNeighbours.Value;
-
-    public int Cost => 1;
-
-    public Tile(int x, int y, bool isTraversable, Func<Tile, IEnumerable<Tile>> fillNeighboursFunc)
-    {
-        Position = new Point(x, y);
-        this.IsTraversable = isTraversable;
-        this.cachedNeighbours = new Cached<IEnumerable<Tile>>(() => fillNeighboursFunc(this));
-    }
-
-    public bool Equals(Tile? other)
-    {
-        if (other == null) return false;
-        return base.Equals(other);
-    }
-}
-
 [DebuggerDisplay("{CharRepresentation}")]
 class PointOfInterestTile : Tile
 {
@@ -94,32 +90,5 @@ class PointOfInterestTile : Tile
         : base(x, y, isTraversable, fillNeighboursFunc)
     {
         this.NumberOfInterest = numberOfInterest;
-    }
-}
-
-class TileWorld : IWorld
-{
-    private readonly List<Tile> allTiles = new();
-
-    public IEnumerable<IWorldObject> WorldObjects => this.allTiles;
-
-    public TileWorld(IEnumerable<string> map, Func<int, int, char, Func<Tile, IEnumerable<Tile>>, Tile> tileCreatingFunc)
-    {
-        int y = 0;
-        foreach (var line in map)
-        {
-            for (int x = 0; x < line.Length; x++)
-            {
-                char c = line[x];
-
-                allTiles.Add(tileCreatingFunc(x, y, c, GetNeighboursOfTile));
-            }
-            y++;
-        }
-    }
-
-    private IEnumerable<Tile> GetNeighboursOfTile(Tile tile)
-    {
-        return this.allTiles.Where(w => tile.Position.IsNeighbour(w.Position));
     }
 }
