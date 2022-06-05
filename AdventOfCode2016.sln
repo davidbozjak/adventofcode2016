@@ -53,6 +53,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day21_StringScrambler", "Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day22_Disks", "Day22_Disks\Day22_Disks.csproj", "{D7D2D908-5D9D-4101-A1B7-D20BBEA89F50}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day23_Virus", "Day23_Virus\Day23_Virus.csproj", "{81BBD890-E821-4D85-9B32-2BF8F634DF6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +161,10 @@ Global
 		{D7D2D908-5D9D-4101-A1B7-D20BBEA89F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7D2D908-5D9D-4101-A1B7-D20BBEA89F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7D2D908-5D9D-4101-A1B7-D20BBEA89F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81BBD890-E821-4D85-9B32-2BF8F634DF6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81BBD890-E821-4D85-9B32-2BF8F634DF6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81BBD890-E821-4D85-9B32-2BF8F634DF6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81BBD890-E821-4D85-9B32-2BF8F634DF6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
